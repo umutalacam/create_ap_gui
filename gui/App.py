@@ -1,8 +1,9 @@
+#!/bin/python3
 import mainwindow;
 import os;
 import sys;
 import netifaces;
-from PyQt5.QtWidgets import QApplication, QWidget;
+from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox;
 
 
 class App(QWidget, mainwindow.Ui_Dialog):
@@ -29,15 +30,19 @@ class App(QWidget, mainwindow.Ui_Dialog):
 
 	def reject(self):
 		sys.exit()
- 
+	 
+	def showErrorDialog(self, message):
+		  print(message);
 	#commands
 	def create_ap(self, source, sharing, ssid, password, internetAvaible):
 		flag = ""
 		if not internetAvaible:
 			flag = "-n"
-		command = "create_ap {} {} {} {} {}".format(flag, source, sharing, ssid, password)
+		command = "create_ap {} {} {} {} {}".format(flag, sharing, source, ssid, password)
 		print(command)
 		os.system(command)
+	
+	
 
 
 if __name__ == '__main__':
